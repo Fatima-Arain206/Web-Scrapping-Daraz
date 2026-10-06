@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Web-Scrapping-Daraz
 # Daraz E-Commerce Intelligence System
 
@@ -976,3 +977,183 @@ Possible future extensions include:
 > Web Scraping + Data Engineering + Statistics + Machine Learning + Recommendation System
 
 This project is being developed as an academic data science project with the goal of building a complete real-world data pipeline from web data collection to intelligent decision-making.
+=======
+# Daraz Review Scraping & Sentiment/Emotion Analysis
+
+A course project (Computer Science, Sindh University, Laar Campus) that collects **product review text from Daraz** using Python, builds my own dataset, and prepares it for **NLP / Machine Learning** (sentiment and emotion classification).
+
+> **Status:** 🚧 Work in progress. This README describes the plan and structure. Sections marked *(to be filled)* will be updated as each phase is completed.
+
+---
+
+## 1. Project Goal
+
+```
+Daraz product reviews
+        ↓
+Python scraper (fetch → parse → extract)
+        ↓
+pandas DataFrame
+        ↓
+Clean / validate
+        ↓
+CSV dataset
+        ↓
+Statistical analysis (EDA)
+        ↓
+NLP + ML (sentiment / emotion classification)
+```
+
+**Step 1 objective:** extract text data (reviews) from Daraz with Python.
+**Later:** extend to multiple products and, if possible, other platforms.
+
+---
+
+## 2. Reference Work
+
+This project follows the methodology of the following dataset paper, but builds its **own data** instead of reusing theirs:
+
+> Rashid, M.R.A., Hasan, K.F., Hasan, R., Das, A., Sultana, M., Hasan, M. (2024).
+> *A comprehensive dataset for sentiment and emotion classification from Bangladesh e-commerce reviews.* Data in Brief, 53, 110052.
+> DOI: 10.1016/j.dib.2024.110052
+
+Key ideas taken from the paper:
+
+- Reviews collected from e-commerce platforms (Daraz, Pickaboo)
+- Fields per review: Rating, Review, Product Name, Product Category, Emotion, Sentiment, Data Source
+- Emotion labels (Shaver's model): Happiness, Love, Sadness, Anger, Fear
+- Sentiment: Positive (Happiness, Love) / Negative (Sadness, Anger, Fear)
+- Preprocessing: remove duplicates and null entries
+- Quality check of manual labels using Cohen's Kappa
+
+---
+
+## 3. First Scraping Target
+
+| Item | Value |
+|------|-------|
+| Platform | Daraz |
+| Product | Wireless earbuds (air31 TWS) |
+| Item ID | 435277150 |
+| Approx. reviews | ~1976 |
+
+---
+
+## 4. Planned Dataset Schema
+
+| Column | Description |
+|--------|-------------|
+| `rating` | Star rating given by the customer |
+| `review` | Review text |
+| `product_name` | Name of the product |
+| `product_category` | Product category |
+| `emotion` | Emotion label *(annotation phase)* |
+| `sentiment` | Positive / Negative *(derived from emotion)* |
+| `data_source` | Platform name (e.g. Daraz) |
+
+---
+
+## 5. Project Phases
+
+| # | Phase | Tools | Status |
+|---|-------|-------|--------|
+| 1 | Understand HTTP request/response and HTML structure | `requests` | ⬜ |
+| 2 | Inspect raw response, locate review data | browser DevTools | ⬜ |
+| 3 | Parse and extract fields | `BeautifulSoup` | ⬜ |
+| 4 | Collect multiple reviews (pagination if needed) | Python | ⬜ |
+| 5 | Build DataFrame, clean, validate | `pandas` | ⬜ |
+| 6 | Save dataset | CSV | ⬜ |
+| 7 | Statistical analysis (EDA) | `pandas`, `matplotlib`, `scipy` | ⬜ |
+| 8 | NLP preprocessing and ML baseline | `scikit-learn` | ⬜ |
+
+Advanced tools (Selenium / Playwright / API calls) are used **only if** the website actually requires them (e.g. JavaScript-rendered content).
+
+---
+
+## 6. Folder Structure
+
+```
+daraz-review-analysis/
+│
+├── data/
+│   ├── raw/          # scraped data, never edited by hand
+│   └── processed/    # cleaned data
+│
+├── notebooks/        # exploration and analysis
+├── src/              # scraper and helper scripts
+├── models/           # saved models (later phase)
+├── results/          # plots and metrics
+├── reports/          # written findings
+├── requirements.txt
+└── README.md
+```
+
+Raw and processed data are kept separate so every experiment is reproducible.
+
+---
+
+## 7. Installation
+
+```bash
+git clone https://github.com/Fatima-Arain206/<repo-name>.git
+cd <repo-name>
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Core libraries: `requests`, `beautifulsoup4`, `pandas`, `matplotlib`, `scipy`, `scikit-learn`.
+
+---
+
+## 8. Usage
+
+*(to be filled once the scraper is implemented)*
+
+---
+
+## 9. Results
+
+*(to be filled: dataset size, class distribution, statistical findings, model metrics)*
+
+---
+
+## 10. Methodology Notes
+
+- **Fetching, parsing, extraction, transformation and storage** are kept as separate steps.
+- **Data leakage check:** if the task is `Review → Sentiment`, then `X = Review`, `y = Sentiment`. The `Sentiment` and `Emotion` columns are never used as input features for their own prediction.
+- **Class imbalance:** accuracy alone is not enough; evaluation will also use precision, recall, F1-score (macro and weighted) and a confusion matrix.
+- **Preprocessing** (TF-IDF, etc.) is fitted on training data only, then applied to test data.
+
+---
+
+## 11. Responsible Scraping
+
+- Only publicly visible data is collected.
+- No attempt is made to bypass login, CAPTCHA or other access controls.
+- Requests are rate-limited, and the site's terms and robots directives are respected.
+- Reviewer names and user IDs are not stored.
+- Data is used for educational purposes only.
+
+---
+
+## 12. Limitations
+
+- Data comes from a single platform and, initially, a single product, so it may not represent the whole e-commerce market.
+- Labels may be imbalanced (positive reviews usually dominate).
+- *(more to be added as the project develops)*
+
+---
+
+## 13. Author
+
+**Fatima Arain**
+Computer Science student, Sindh University, Laar Campus
+GitHub: [@Fatima-Arain206](https://github.com/Fatima-Arain206)
+
+---
+
+## 14. License
+
+*(to be decided, e.g. MIT for code. Scraped review data should not be redistributed without checking the source platform's terms.)*
+>>>>>>> 194b2bb (md)
